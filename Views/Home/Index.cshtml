@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Book_Lending.DTO.Book.UserDTO>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h2>Users</h2>
+    </div>
+    <div class="card-body">
+        
+
+           <div class="row">
+              <div class="col-md-12">
+                  <nav aria-label="Page Navigation">
+                      <ul class="pagination">
+                        <a class="page-link" href="@Url.Action("Index", new {page= 1})"><<</a>
+                        <a class="page-link" href="@Url.Action("Index", new {page= ViewBag.CurrentPage - 1})"> < </a>
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new {page= i })">@i</a>
+                          </li>
+
+                        }
+                        <a class="page-link" href="@Url.Action("Index", new {page= ViewBag.CurrentPage + 1})">></a>
+                        <a class="page-link" href="@Url.Action("Index", new {page= ViewBag.TotalPages})">>></a>
+                      
+                      </ul>
+                  </nav>
+
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>
+                                      Action
+                                  </th>
+                                <th>
+                                    FirstName
+                                </th>
+                                <th>
+                                    MiddleName
+                                </th>
+                                <th>
+                                    Surname
+                                </th>
+                                <th>
+                                    Created Date
+                                </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td><a asp-action="" asp-controller="" asp-route-id="@user.UserId">Edit</a>
+                                            <a asp-action="" asp-controller="" asp-route-id="@user.UserId">Delete</a>
+                                            </td>
+                                        <td>@user.Name</td>
+                                        <td>@user.MiddleName</td>
+                                        <td>@user.Surname</td>
+                                        <td>@user.CreatedDate</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No Data</td>
+                                </tr>
+                            }
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+           </div>
+
+
+
+    </div>
+</div>
