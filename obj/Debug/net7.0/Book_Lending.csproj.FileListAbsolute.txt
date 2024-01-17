@@ -73,3 +73,6 @@ C:\Users\User\Documents\GitHub\Book_Lending\obj\Debug\net7.0\refint\Book_Lending
 C:\Users\User\Documents\GitHub\Book_Lending\obj\Debug\net7.0\Book_Lending.pdb
 C:\Users\User\Documents\GitHub\Book_Lending\obj\Debug\net7.0\Book_Lending.genruntimeconfig.cache
 C:\Users\User\Documents\GitHub\Book_Lending\obj\Debug\net7.0\ref\Book_Lending.dll
+C:\Users\User\Documents\GitHub\Book_Lending\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\User\Documents\GitHub\Book_Lending\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\User\Documents\GitHub\Book_Lending\obj\Debug\net7.0\Book_Lending.sourcelink.json

@@ -5,31 +5,39 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Book_Lending.DTO.Book;
 using ATEC_BOOK_LENDING.GenericClass;
+using AutoMapper;
 namespace Book_Lending.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly BookContext _bookContext;
+        private readonly IMapper _mapper;
 
         Pagination _pagination = new Pagination();
         
-        public HomeController(ILogger<HomeController> logger, BookContext bookContext)
+        public HomeController(ILogger<HomeController> logger, BookContext bookContext,IMapper mapper)
         {
             _logger = logger;
             _bookContext = bookContext;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index(int page=1 ,int pageSize=4)
         {
-            var getBookDTOquery = _bookContext.Users.Select(usrDTO => new UserDTO
-            {
-               UserId = usrDTO.UserId,
-               Name = usrDTO.Name,
-               MiddleName = usrDTO.MiddleName,
-               Surname = usrDTO.Surname,
-               CreatedDate = usrDTO.CreatedDate,
-            }).OrderBy(orderUsrDTO => orderUsrDTO.Name);
+            //var getBookDTOquery = _bookContext.Users.Select(usrDTO => new UserDTO
+            //{
+            //   UserId = usrDTO.UserId,
+            //   Name = usrDTO.Name,
+            //   MiddleName = usrDTO.MiddleName,
+            //   Surname = usrDTO.Surname,
+            //   CreatedDate = usrDTO.CreatedDate,
+            //}).OrderBy(orderUsrDTO => orderUsrDTO.Name);
+
+            var getBookDTOquery = _bookContext
+                .Users.OrderBy(orderUsrDTO => orderUsrDTO.Name)
+                .Select(usrDTO => _mapper.Map<UserDTO>(usrDTO));
+
 
             var (Ipage, totalPages, IpageSize, totalRecords) = 
                 _pagination.CalculateTotalRecordsAndPages(getBookDTOquery, page, pageSize);
