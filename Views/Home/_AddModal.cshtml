@@ -1,0 +1,57 @@
+﻿@model Book_Lending.Models.Book.User
+@using (Html.BeginForm("AddUserSubmit", "Home", FormMethod.Post))
+     {
+         @Html.AntiForgeryToken()
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+        
+                        @* Content *@
+             
+                        <div class="row">
+        
+                             <div class="col-md-4">
+                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, "Name")
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                 </div>
+                             </div>
+        
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MiddleName, "MiddleName")
+                                    @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MiddleName)
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Surname, "Surname")
+                                    @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Surname)
+                                </div>
+                            </div>
+        
+                         </div>
+                    
+        
+                        @* End of Content *@
+        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <input type="submit" id="btnAddUserYes" class="btn btn-primary" value="Add"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+}

@@ -9,6 +9,30 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.js",
+      "PackagePath": "staticwebassets\\js\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.min.map",
+      "PackagePath": "staticwebassets\\js\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.slim.js",
+      "PackagePath": "staticwebassets\\js\\jquery.slim.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.slim.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.slim.min.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\js\\jquery.slim.min.map",
+      "PackagePath": "staticwebassets\\js\\jquery.slim.min.map"
+    },
+    {
       "Id": "C:\\Users\\User\\Documents\\GitHub\\Book_Lending\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

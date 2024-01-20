@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Book_Lending.Context;
+namespace Book_Lending.Models.Book;
 
 public partial class Transaction
 {
