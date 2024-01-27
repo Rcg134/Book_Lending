@@ -7,8 +7,10 @@ using Book_Lending.DTO.Book;
 using ATEC_BOOK_LENDING.GenericClass;
 using AutoMapper;
 using Book_Lending.Models.Book;
+using Microsoft.AspNetCore.Authorization;
 namespace Book_Lending.Controllers
 {
+   
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class HomeController : Controller
     {
@@ -31,8 +33,8 @@ namespace Book_Lending.Controllers
                                                int pageSize=2)
         {
             var getBookDTOquery = _bookContext.
-                Users.OrderBy(orderUser => orderUser.Name).
-                Select(user => _mapper.Map<UserDTO>(user));
+                Users.OrderByDescending(orderUser => orderUser.Name).
+                Select(user => _mapper.Map<UserDTO>(user)).AsNoTracking();
 
 
             var (Ipage, totalPages, IpageSize, totalRecords) = 
@@ -51,6 +53,7 @@ namespace Book_Lending.Controllers
             return View(bookPaginatedList);
         }
 
+        [HttpGet]
         public async Task<IActionResult> AddUser()
         {
             return View();
@@ -72,13 +75,62 @@ namespace Book_Lending.Controllers
             return View(addUser);
         }
 
+        public async Task<IActionResult> EditUser(int userID)
+        {
+            var usrDetail = await _bookContext
+                                      .Users
+                                      .SingleOrDefaultAsync(detail => detail.UserId == userID);
+            var dtoDetails = _mapper.Map<UserDTO>(usrDetail);
+            return View(dtoDetails);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(UserUpdateDTO userDTODetails)
+        {
+            var userDetail = _bookContext
+                                 .Users
+                                 .SingleOrDefault(detail => detail.UserId == userDTODetails.UserId);
+            if (ModelState.IsValid)
+            {
+                _mapper.Map(userDTODetails, userDetail);
+               await _bookContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+
+            return View(userDTODetails);
+        }
+
+        public async Task<IActionResult> _DeleteUser(int userID)
+        {
+            var usrDetail = await _bookContext
+                                      .Users
+                                      .SingleOrDefaultAsync(detail => detail.UserId == userID);
+            return PartialView(usrDetail);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(User usredtail)
+        {
+            var usrDetail = await _bookContext
+                                      .Users
+                                      .SingleOrDefaultAsync(detail => detail.UserId == usredtail.UserId);
+            if (usrDetail != null)
+            {
+                _bookContext.Remove(usrDetail);
+                _bookContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+
+        }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
 
         public IActionResult Error()
         {

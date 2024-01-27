@@ -35,9 +35,8 @@
                         @for (int i = 1; i <= ViewBag.TotalPages; i++)
                         {
                          <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                <a class="page-link" href="@Url.Action("Index", new {page= i })">@i</a>
-                          </li>
-
+                              <a class="page-link" href="@Url.Action("Index", new {page= i })">@i</a>
+                         </li>
                         }
                         <a class="page-link" href="@Url.Action("Index", new {page= ViewBag.TotalPages})">>></a>
                       
@@ -71,8 +70,9 @@
                                 foreach (var user in Model)
                                 {
                                     <tr>
-                                        <td><a asp-action="" asp-controller="" asp-route-id="@user.UserId">Edit</a>
-                                            <a asp-action="" asp-controller="" asp-route-id="@user.UserId">Delete</a>
+                                        <td>
+                                            <a asp-action="EditUser" asp-controller="" asp-route-userID="@user.UserId">Edit</a>
+                                            <button class="btn btn-danger" id="btnDeleteuser" data-user-userid="@user.UserId">Delete</button>
                                             </td>
                                         <td>@user.Name</td>
                                         <td>@user.MiddleName</td>
@@ -98,8 +98,8 @@
     </div>
 </div>
 
-@* <div id="addModal">
-</div> *@
+<div id="deleteModal">
+</div>
 
 @section Scripts {
 
@@ -109,22 +109,23 @@
 
         $(function () {
 
-            // $(document).on("click", "#btnaddUser", function () {
-         
-            //     $.ajax({
-            //         type: 'GET',
-            //         url: 'Home/_AddModal',
-            //         success: function (response) {
-            //             $('#addModal').append(response);
-            //             $('#addUserModal').modal("show");
-            //         },
-            //         error: function (xhr, status, error) {
-            //             alert(error)
-            //         }
-            //     });
-
-
-            // });
+            $(document).on("click", "#btnDeleteuser", function () {
+                var userID = $(this).data('user-userid')
+                $.ajax({
+                    type: 'GET',
+                    url: 'Home/_DeleteUser',
+                    data:{
+                        userID: userID
+                    },
+                    success: function (response) {
+                        $('#deleteModal').append(response);
+                        $('#deleteUserModal').modal("show");
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error)
+                    }
+                });
+            });
 
         });
 
